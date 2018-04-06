@@ -14,6 +14,7 @@ import os
 import json
 
 from django.core.exceptions import ImproperlyConfigured
+from django.urls import reverse_lazy
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -144,7 +145,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-from django.urls import reverse_lazy
+# Redirect login urls
 
 LOGIN_REDIRECT_URL = reverse_lazy('account:dashboard')
 LOGIN_URL = reverse_lazy('account:login')
+
+
+# Email host configuration from secrets.json
+
+EMAIL_HOST = get_secret('EMAIL_HOST')
+EMAIL_HOST_USER = get_secret('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = get_secret('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = get_secret('EMAIL_PORT')
+EMAIL_USE_TLS = True
